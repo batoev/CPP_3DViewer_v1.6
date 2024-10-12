@@ -103,6 +103,202 @@ TEST(Parser, Test_2) {
   EXPECT_EQ(controller.GetFacets()[71], 1);
 }
 
+TEST(Controller_Scale, Test_1) {
+  std::string filename = "./objects/test.obj";
+  s21::Controller controller;
+  controller.Parser(filename);
+  size_t n = controller.GetVertices().size();
+  double *arr_x = nullptr;
+  double *arr_y = nullptr;
+  double *arr_z = nullptr;
+  arr_x = new double[n];
+  arr_y = new double[n];
+  arr_z = new double[n];
+  for (size_t i = 0; i < n; ++i) {
+    arr_x[i] = controller.GetVertices()[i].x;
+    arr_y[i] = controller.GetVertices()[i].y;
+    arr_z[i] = controller.GetVertices()[i].z;
+  }
+  int x = 2;
+  controller.Scale(x);
+  for (size_t i = 0; i < n; ++i) {
+    EXPECT_EQ(controller.GetVertices()[i].x, arr_x[i] * x);
+    EXPECT_EQ(controller.GetVertices()[i].y, arr_y[i] * x);
+    EXPECT_EQ(controller.GetVertices()[i].z, arr_z[i] * x);
+  }
+}
+
+TEST(Controller_Scale, Test_2) {
+  std::string filename = "./objects/test.obj";
+  s21::Controller controller;
+  controller.Parser(filename);
+  size_t n = controller.GetVertices().size();
+  double *arr_x = nullptr;
+  double *arr_y = nullptr;
+  double *arr_z = nullptr;
+  arr_x = new double[n];
+  arr_y = new double[n];
+  arr_z = new double[n];
+  for (size_t i = 0; i < n; ++i) {
+    arr_x[i] = controller.GetVertices()[i].x;
+    arr_y[i] = controller.GetVertices()[i].y;
+    arr_z[i] = controller.GetVertices()[i].z;
+  }
+  int x = 5;
+  controller.Scale(x);
+  for (size_t i = 0; i < n; ++i) {
+    EXPECT_EQ(controller.GetVertices()[i].x, arr_x[i] * x);
+    EXPECT_EQ(controller.GetVertices()[i].y, arr_y[i] * x);
+    EXPECT_EQ(controller.GetVertices()[i].z, arr_z[i] * x);
+  }
+}
+
+TEST(Controller_Shift, Test_1) {
+  std::string filename = "./objects/test.obj";
+  s21::Controller controller;
+  controller.Parser(filename);
+  size_t n = controller.GetVertices().size();
+  double *arr_x = nullptr;
+  double *arr_y = nullptr;
+  double *arr_z = nullptr;
+  arr_x = new double[n];
+  arr_y = new double[n];
+  arr_z = new double[n];
+  for (size_t i = 0; i < n; ++i) {
+    arr_x[i] = controller.GetVertices()[i].x;
+    arr_y[i] = controller.GetVertices()[i].y;
+    arr_z[i] = controller.GetVertices()[i].z;
+  }
+  int x = 5, y = 3, z = -7;
+  controller.Shift(x, y, z);
+  for (size_t i = 0; i < n; ++i) {
+    EXPECT_EQ(controller.GetVertices()[i].x, arr_x[i] + x);
+    EXPECT_EQ(controller.GetVertices()[i].y, arr_y[i] + y);
+    EXPECT_EQ(controller.GetVertices()[i].z, arr_z[i] + z);
+  }
+}
+
+TEST(Controller_Shift, Test_2) {
+  std::string filename = "./objects/test.obj";
+  s21::Controller controller;
+  controller.Parser(filename);
+  size_t n = controller.GetVertices().size();
+  double *arr_x = nullptr;
+  double *arr_y = nullptr;
+  double *arr_z = nullptr;
+  arr_x = new double[n];
+  arr_y = new double[n];
+  arr_z = new double[n];
+  for (size_t i = 0; i < n; ++i) {
+    arr_x[i] = controller.GetVertices()[i].x;
+    arr_y[i] = controller.GetVertices()[i].y;
+    arr_z[i] = controller.GetVertices()[i].z;
+  }
+  int x = 24.05, y = 19.88, z = 5;
+  controller.Shift(x, y, z);
+  for (size_t i = 0; i < n; ++i) {
+    EXPECT_NEAR(controller.GetVertices()[i].x, arr_x[i] + x, S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].y, arr_y[i] + y, S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].z, arr_z[i] + z, S21_EPS);
+  }
+}
+
+TEST(Controller_Rotate, Test_1) {
+  std::string filename = "./objects/test.obj";
+  s21::Controller controller;
+  controller.Parser(filename);
+  size_t n = controller.GetVertices().size();
+  double *arr_x = nullptr;
+  double *arr_y = nullptr;
+  double *arr_z = nullptr;
+  arr_x = new double[n];
+  arr_y = new double[n];
+  arr_z = new double[n];
+  for (size_t i = 0; i < n; ++i) {
+    arr_x[i] = controller.GetVertices()[i].x;
+    arr_y[i] = controller.GetVertices()[i].y;
+    arr_z[i] = controller.GetVertices()[i].z;
+  }
+  double degrees = 24.05;
+  int ax = 0;
+  controller.Rotate(degrees, ax);
+  for (size_t i = 0; i < n; ++i) {
+    EXPECT_NEAR(controller.GetVertices()[i].x, arr_x[i], S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].y,
+                arr_y[i] * cos(degrees * M_PI / 180) -
+                    arr_z[i] * sin(degrees * M_PI / 180),
+                S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].z,
+                arr_y[i] * sin(degrees * M_PI / 180) +
+                    arr_z[i] * cos(degrees * M_PI / 180),
+                S21_EPS);
+  }
+}
+
+TEST(Controller_Rotate, Test_2) {
+  std::string filename = "./objects/test.obj";
+  s21::Controller controller;
+  controller.Parser(filename);
+  size_t n = controller.GetVertices().size();
+  double *arr_x = nullptr;
+  double *arr_y = nullptr;
+  double *arr_z = nullptr;
+  arr_x = new double[n];
+  arr_y = new double[n];
+  arr_z = new double[n];
+  for (size_t i = 0; i < n; ++i) {
+    arr_x[i] = controller.GetVertices()[i].x;
+    arr_y[i] = controller.GetVertices()[i].y;
+    arr_z[i] = controller.GetVertices()[i].z;
+  }
+  double degrees = 24.05;
+  int ax = 1;
+  controller.Rotate(degrees, ax);
+  for (size_t i = 0; i < n; ++i) {
+    EXPECT_NEAR(controller.GetVertices()[i].x,
+                arr_x[i] * cos(degrees * M_PI / 180) +
+                    arr_z[i] * sin(degrees * M_PI / 180),
+                S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].y, arr_y[i], S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].z,
+                -arr_x[i] * sin(degrees * M_PI / 180) +
+                    arr_z[i] * cos(degrees * M_PI / 180),
+                S21_EPS);
+  }
+}
+
+TEST(Controller_Rotate, Test_3) {
+  std::string filename = "./objects/test.obj";
+  s21::Controller controller;
+  controller.Parser(filename);
+  size_t n = controller.GetVertices().size();
+  double *arr_x = nullptr;
+  double *arr_y = nullptr;
+  double *arr_z = nullptr;
+  arr_x = new double[n];
+  arr_y = new double[n];
+  arr_z = new double[n];
+  for (size_t i = 0; i < n; ++i) {
+    arr_x[i] = controller.GetVertices()[i].x;
+    arr_y[i] = controller.GetVertices()[i].y;
+    arr_z[i] = controller.GetVertices()[i].z;
+  }
+  double degrees = 24.05;
+  int ax = 3;
+  controller.Rotate(degrees, ax);
+  for (size_t i = 0; i < n; ++i) {
+    EXPECT_NEAR(controller.GetVertices()[i].x,
+                arr_x[i] * cos(degrees * M_PI / 180) -
+                    arr_y[i] * sin(degrees * M_PI / 180),
+                S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].y,
+                arr_x[i] * sin(degrees * M_PI / 180) +
+                    arr_y[i] * cos(degrees * M_PI / 180),
+                S21_EPS);
+    EXPECT_NEAR(controller.GetVertices()[i].z, arr_z[i], S21_EPS);
+  }
+}
+
 TEST(ScanLineF, Test_1) {
   std::string line = " 3/3/3";
   int vertices_per_facet = 0;
@@ -188,16 +384,6 @@ TEST(ScanLineF, Test_6) {
   EXPECT_EQ(vertices_ids[2], 3);
   EXPECT_EQ(vertices_ids[3], -4);
 }
-
-// TEST(ScanLineF, Test6) {
-//   std::string line = "1/2/3 g4/5/6";
-//   int vertices_per_facet = 0;
-//   std::vector<int> vertices_ids;
-
-//   s21::Model model;
-//   EXPECT_THROW(model.ScanLineF(line, &vertices_per_facet, vertices_ids),
-//   std::runtime_error);
-// }
 
 TEST(ParseLineF, Test_1) {
   std::string line = "8 4 2";
