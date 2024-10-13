@@ -14,6 +14,7 @@ cppFiles = $(shell find . -name "*.cpp")
 headFiles = $(shell find . -name "*.h")
 DOXYGEN = doxygen
 DOXYFILE = Doxyfile
+DOCS_DIR = docs/html/index.html
 
 ifeq ($(OS), Linux)
 	OPEN_RUN = ./$(INSTALL_DIR)/$(PROJECT)
@@ -41,10 +42,11 @@ uninstall:
 clean: 
 	rm -rf $(EXECUTABLE) $(PROJECT).a $(PROJECT)_test.a *.gcda *.gcno *.info
 	rm -rf $(REPORT)
+	rm -rf docs/
 
 dvi: $(DOXYFILE)
 	$(DOXYGEN) $(DOXYFILE)
-	open $(DOCS_DIR)
+	$(OPEN_CMD) $(DOCS_DIR)
 
 dist: install uninstall
 	rm -rf dist-molliekh-3DViewer.tar.gz

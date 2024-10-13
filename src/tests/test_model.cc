@@ -108,12 +108,9 @@ TEST(Controller_Scale, Test_1) {
   s21::Controller controller;
   controller.Parser(filename);
   size_t n = controller.GetVertices().size();
-  double *arr_x = nullptr;
-  double *arr_y = nullptr;
-  double *arr_z = nullptr;
-  arr_x = new double[n];
-  arr_y = new double[n];
-  arr_z = new double[n];
+  std::vector<double> arr_x(n);
+  std::vector<double> arr_y(n);
+  std::vector<double> arr_z(n);
   for (size_t i = 0; i < n; ++i) {
     arr_x[i] = controller.GetVertices()[i].x;
     arr_y[i] = controller.GetVertices()[i].y;
@@ -126,6 +123,10 @@ TEST(Controller_Scale, Test_1) {
     EXPECT_EQ(controller.GetVertices()[i].y, arr_y[i] * x);
     EXPECT_EQ(controller.GetVertices()[i].z, arr_z[i] * x);
   }
+  controller.ClearObj();
+  arr_x.clear();
+  arr_y.clear();
+  arr_z.clear();
 }
 
 TEST(Controller_Scale, Test_2) {
@@ -133,12 +134,9 @@ TEST(Controller_Scale, Test_2) {
   s21::Controller controller;
   controller.Parser(filename);
   size_t n = controller.GetVertices().size();
-  double *arr_x = nullptr;
-  double *arr_y = nullptr;
-  double *arr_z = nullptr;
-  arr_x = new double[n];
-  arr_y = new double[n];
-  arr_z = new double[n];
+  std::vector<double> arr_x(n);
+  std::vector<double> arr_y(n);
+  std::vector<double> arr_z(n);
   for (size_t i = 0; i < n; ++i) {
     arr_x[i] = controller.GetVertices()[i].x;
     arr_y[i] = controller.GetVertices()[i].y;
@@ -158,12 +156,9 @@ TEST(Controller_Shift, Test_1) {
   s21::Controller controller;
   controller.Parser(filename);
   size_t n = controller.GetVertices().size();
-  double *arr_x = nullptr;
-  double *arr_y = nullptr;
-  double *arr_z = nullptr;
-  arr_x = new double[n];
-  arr_y = new double[n];
-  arr_z = new double[n];
+  std::vector<double> arr_x(n);
+  std::vector<double> arr_y(n);
+  std::vector<double> arr_z(n);
   for (size_t i = 0; i < n; ++i) {
     arr_x[i] = controller.GetVertices()[i].x;
     arr_y[i] = controller.GetVertices()[i].y;
@@ -183,12 +178,9 @@ TEST(Controller_Shift, Test_2) {
   s21::Controller controller;
   controller.Parser(filename);
   size_t n = controller.GetVertices().size();
-  double *arr_x = nullptr;
-  double *arr_y = nullptr;
-  double *arr_z = nullptr;
-  arr_x = new double[n];
-  arr_y = new double[n];
-  arr_z = new double[n];
+  std::vector<double> arr_x(n);
+  std::vector<double> arr_y(n);
+  std::vector<double> arr_z(n);
   for (size_t i = 0; i < n; ++i) {
     arr_x[i] = controller.GetVertices()[i].x;
     arr_y[i] = controller.GetVertices()[i].y;
@@ -208,12 +200,9 @@ TEST(Controller_Rotate, Test_1) {
   s21::Controller controller;
   controller.Parser(filename);
   size_t n = controller.GetVertices().size();
-  double *arr_x = nullptr;
-  double *arr_y = nullptr;
-  double *arr_z = nullptr;
-  arr_x = new double[n];
-  arr_y = new double[n];
-  arr_z = new double[n];
+  std::vector<double> arr_x(n);
+  std::vector<double> arr_y(n);
+  std::vector<double> arr_z(n);
   for (size_t i = 0; i < n; ++i) {
     arr_x[i] = controller.GetVertices()[i].x;
     arr_y[i] = controller.GetVertices()[i].y;
@@ -240,12 +229,9 @@ TEST(Controller_Rotate, Test_2) {
   s21::Controller controller;
   controller.Parser(filename);
   size_t n = controller.GetVertices().size();
-  double *arr_x = nullptr;
-  double *arr_y = nullptr;
-  double *arr_z = nullptr;
-  arr_x = new double[n];
-  arr_y = new double[n];
-  arr_z = new double[n];
+  std::vector<double> arr_x(n);
+  std::vector<double> arr_y(n);
+  std::vector<double> arr_z(n);
   for (size_t i = 0; i < n; ++i) {
     arr_x[i] = controller.GetVertices()[i].x;
     arr_y[i] = controller.GetVertices()[i].y;
@@ -272,12 +258,9 @@ TEST(Controller_Rotate, Test_3) {
   s21::Controller controller;
   controller.Parser(filename);
   size_t n = controller.GetVertices().size();
-  double *arr_x = nullptr;
-  double *arr_y = nullptr;
-  double *arr_z = nullptr;
-  arr_x = new double[n];
-  arr_y = new double[n];
-  arr_z = new double[n];
+  std::vector<double> arr_x(n);
+  std::vector<double> arr_y(n);
+  std::vector<double> arr_z(n);
   for (size_t i = 0; i < n; ++i) {
     arr_x[i] = controller.GetVertices()[i].x;
     arr_y[i] = controller.GetVertices()[i].y;
